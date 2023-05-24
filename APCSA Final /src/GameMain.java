@@ -15,7 +15,7 @@ public class GameMain extends JPanel implements KeyListener {
     private Image backgroundImage;
      
 
-
+// hola
     public GameMain() {
         // Load the background image
         backgroundImage = new ImageIcon("BackGround Small.png").getImage();
