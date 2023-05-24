@@ -127,6 +127,7 @@ public class GameMain extends JPanel implements KeyListener {
         // Sets window size
         frame.setSize(900, 900);
 
+        
     }
 
 }

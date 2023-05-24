@@ -1,24 +1,21 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+
+
+import javax.swing.JPanel; 
 
 public class RectangleBox extends JPanel {
-    private int width;
-    private int height;
-    private Color color;
 
-    public RectangleBox(int width, int height, Color color) {
-        this.width = width;
-        this.height = height;
-        this.color = color;
-    }
+	public void screen()  {
+		repaint();
+	}
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(color);
-        g.fillRect(0, 0, width, height);
-    }
+	public void paint(Graphics g) {
+		g.setColor(new Color(100, 50, 150));
+		g.drawRect(100, 100, 50, 50);
+		g.setColor(Color.GREEN);
+		g.fillRect(200, 200, 50, 50);
 
-    
+	}
+
 }
-
