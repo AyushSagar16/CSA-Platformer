@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Timer;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -63,7 +65,9 @@ public class GameMain extends JPanel implements KeyListener {
 
         if (keyCode == KeyEvent.VK_LEFT) {
             // Move the sprite to the left
-            sprite.move(-10, 0);
+            // sprite.move(-10, 0);
+            System.out.println("lol");
+            
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             // Move the sprite to the right
             sprite.move(10, 0);
@@ -100,6 +104,7 @@ public class GameMain extends JPanel implements KeyListener {
 
         // Add the game panel to the window
         Window game = new Window();
+        game.setVelocityY(0);
         frame.add(game);
 
 
