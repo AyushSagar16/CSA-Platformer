@@ -14,13 +14,15 @@ public class GameMain extends JPanel implements KeyListener {
 
 
     private Sprite sprite;
-    private Image backgroundImage;
+    private Sprite backgroundSprite;
      
 
 // hola
     public GameMain() {
         // Load the background image
-        backgroundImage = new ImageIcon("BackGround Small.png").getImage();
+        // backgroundImage = new ImageIcon("BackGround Small.png").getImage();
+
+        backgroundSprite = new Sprite(0, 0, "background-new.jpg", 1000, 500);
         
        /*  //Platform is created 
         Platform platform = new Platform(10, 50, 100, 10);*/
@@ -45,7 +47,7 @@ public class GameMain extends JPanel implements KeyListener {
 
 
         // Draw the background image
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+        // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
 
         //platform is drawn
         
@@ -66,11 +68,11 @@ public class GameMain extends JPanel implements KeyListener {
         if (keyCode == KeyEvent.VK_LEFT) {
             // Move the sprite to the left
             // sprite.move(-10, 0);
-            System.out.println("lol");
+            //System.out.println("lol");
             
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             // Move the sprite to the right
-            sprite.move(10, 0);
+            // sprite.move(10, 0);
         }
 
 

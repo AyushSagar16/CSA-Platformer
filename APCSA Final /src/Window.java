@@ -23,7 +23,8 @@ public class Window extends JPanel implements ActionListener {
     private Image spriteImage;
     private int spriteX;
     private int spriteY;
-    private int spriteVelocityY;
+    private int playerSpriteVelocityY;
+    private int backgroundSpriteVelocityX;
     private int gravity;
     private boolean isJumping;
     private boolean isGrounded;
@@ -32,11 +33,12 @@ public class Window extends JPanel implements ActionListener {
         x = 50;
         y = 200;
         backgroundX = 0;
-        backgroundImage = new ImageIcon("BackGround Small.png").getImage();
+        backgroundImage = new ImageIcon("background-new.jpg").getImage();
         spriteImage = new ImageIcon("RealChar.png").getImage(); // Replace "SpriteImage.png" with your sprite image file
         spriteX = 100; // Initial X coordinate of the sprite
         spriteY = 50; // Initial Y coordinate of the sprite
-        spriteVelocityY = 0; // Initial vertical velocity of the sprite
+        playerSpriteVelocityY = 0; // Initial vertical velocity of the sprite
+        backgroundSpriteVelocityX = 0; // Initial horizontal velocity of the background
         gravity = 3;
         isJumping = false;
         isGrounded = false;
@@ -55,7 +57,11 @@ public class Window extends JPanel implements ActionListener {
                     isJumping = true;
                     jump();
                 } else if (keyCode == KeyEvent.VK_DOWN) {
-                    spriteVelocityY = 5; // Move sprite down
+                    playerSpriteVelocityY = 5; // Move sprite down
+                } else if (keyCode == KeyEvent.VK_LEFT) {
+                    backgroundSpriteVelocityX = 5; // Move background to the left
+                } else if (keyCode == KeyEvent.VK_RIGHT) {
+                    backgroundSpriteVelocityX = -5; // Move background to the right
                 }
             }
 
@@ -64,8 +70,10 @@ public class Window extends JPanel implements ActionListener {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN) {
                     // key();
-                    spriteVelocityY = 0;
+                    playerSpriteVelocityY = 0;
                     isJumping = false;
+                } else if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
+                    backgroundSpriteVelocityX = 0;
                 }
             }
         });
@@ -76,7 +84,7 @@ public class Window extends JPanel implements ActionListener {
         for (int i = 0; i < 10000; i++){
             if (i >= 10000){
                 System.out.println("insideIF");
-                spriteVelocityY = 0;
+                playerSpriteVelocityY = 0;
                 isJumping = false;
             }
         }
@@ -86,7 +94,7 @@ public class Window extends JPanel implements ActionListener {
 
     public void jump() {
         for (int i = 0; i < 1000; i++){
-            spriteVelocityY = -5;
+            playerSpriteVelocityY = -5;
             // System.out.println("Sprite Velocity inside for loop: " + spriteVelocityY);
         }
     }
@@ -94,7 +102,7 @@ public class Window extends JPanel implements ActionListener {
 
 
     public void paint(Graphics g) {
-        g.drawImage(getScaledImage(backgroundImage, getWidth(), getHeight()), -backgroundX, 0, null);
+        g.drawImage(getScaledImage(backgroundImage, getWidth(), getHeight()), backgroundX, 0, null);
 
         // Draw the sprite
         g.drawImage(spriteImage, spriteX, spriteY, null);
@@ -104,13 +112,13 @@ public class Window extends JPanel implements ActionListener {
     
     // Setter method for Velocity
     public void setVelocityY(int newVelocity){
-        spriteVelocityY = newVelocity;
+        playerSpriteVelocityY = newVelocity;
     }
        
         
 
         
-
+    // We set all the movement here
     public void actionPerformed(ActionEvent e) {
         x += 5;
         // backgroundX += 1;
@@ -132,12 +140,16 @@ public class Window extends JPanel implements ActionListener {
         // System.out.println("(X, Y): (" + spriteX + ", " + spriteY + ")");
         if (spriteY < 310 && !isJumping){
             System.out.println("Sprite Y: " + spriteY);
-            spriteVelocityY = gravity;
+            playerSpriteVelocityY = gravity;
         }
         else if(!isJumping){
-            spriteVelocityY = 0;
+            playerSpriteVelocityY = 0;
         }
-        spriteY += spriteVelocityY;
+        spriteY += playerSpriteVelocityY;
+
+
+        // Update background position
+        backgroundX += backgroundSpriteVelocityX;
         
 
         repaint();
