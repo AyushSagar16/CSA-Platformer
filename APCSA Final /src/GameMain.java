@@ -7,6 +7,7 @@ import java.util.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -21,6 +22,8 @@ public class GameMain extends JPanel implements KeyListener {
     public GameMain() {
         // Load the background image
         // backgroundImage = new ImageIcon("BackGround Small.png").getImage();
+
+        
 
         backgroundSprite = new Sprite(0, 0, "background-new.jpg", 1000, 500);
         
@@ -108,6 +111,17 @@ public class GameMain extends JPanel implements KeyListener {
         Window game = new Window();
         game.setVelocityY(0);
         frame.add(game);
+
+        JPanel panel = new JPanel();
+        boolean touchDoor;
+        
+        touchDoor = (game.getBackgroundX() <= -1400)? true : false;
+
+        if (touchDoor) {
+            JLabel congratsLabel = new JLabel("Congrats! Move to the next level.");
+            System.out.print("SONEMTHIGN");
+            panel.add(congratsLabel);
+        }
 
 
         // Show the window

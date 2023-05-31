@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,13 +29,17 @@ public class Window extends JPanel implements ActionListener {
     private int gravity;
     private boolean isJumping;
     private boolean isGrounded;
+    private int groundY;
+    private boolean touchDoor;
+
+    private JPanel panel;
 
     public Window() {
         x = 50;
         y = 200;
         backgroundX = 0;
-        backgroundImage = new ImageIcon("background-new.jpg").getImage();
-        spriteImage = new ImageIcon("RealChar.png").getImage(); // Replace "SpriteImage.png" with your sprite image file
+        backgroundImage = new ImageIcon("background-pixel.png").getImage();
+        spriteImage = new ImageIcon("spongebob.png").getImage(); // Replace "SpriteImage.png" with your sprite image file
         spriteX = 100; // Initial X coordinate of the sprite
         spriteY = 50; // Initial Y coordinate of the sprite
         playerSpriteVelocityY = 0; // Initial vertical velocity of the sprite
@@ -42,6 +47,15 @@ public class Window extends JPanel implements ActionListener {
         gravity = 3;
         isJumping = false;
         isGrounded = false;
+        groundY = 600;
+        panel = new JPanel();
+        touchDoor = false;
+
+
+        // Check the value of the boolean variable
+
+
+        
 
         timer = new Timer(10, this);
         timer.start();
@@ -59,9 +73,9 @@ public class Window extends JPanel implements ActionListener {
                 } else if (keyCode == KeyEvent.VK_DOWN) {
                     playerSpriteVelocityY = 5; // Move sprite down
                 } else if (keyCode == KeyEvent.VK_LEFT) {
-                    backgroundSpriteVelocityX = 5; // Move background to the left
+                    backgroundSpriteVelocityX = 7; // Move background to the left
                 } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    backgroundSpriteVelocityX = -5; // Move background to the right
+                    backgroundSpriteVelocityX = -7; // Move background to the right
                 }
             }
 
@@ -83,7 +97,6 @@ public class Window extends JPanel implements ActionListener {
 
         for (int i = 0; i < 10000; i++){
             if (i >= 10000){
-                System.out.println("insideIF");
                 playerSpriteVelocityY = 0;
                 isJumping = false;
             }
@@ -102,10 +115,10 @@ public class Window extends JPanel implements ActionListener {
 
 
     public void paint(Graphics g) {
-        g.drawImage(getScaledImage(backgroundImage, getWidth(), getHeight()), backgroundX, 0, null);
+        g.drawImage(getScaledImage(backgroundImage, getWidth() + 1000, getHeight()), backgroundX, 0, null);
 
         // Draw the sprite
-        g.drawImage(spriteImage, spriteX, spriteY, null);
+        g.drawImage(getScaledImage(spriteImage, 100, 95), spriteX, spriteY, null);
     }
 
 
@@ -129,16 +142,16 @@ public class Window extends JPanel implements ActionListener {
         // Update sprite position
 
         // Is grounded
-        if (spriteY >= 310){
+        if (spriteY >= groundY){
             isGrounded = true;
         }
-        else if (spriteY < 310){
+        else if (spriteY < groundY){
             isGrounded = false;
         }
         
         // System.out.println("Sprite Velocity: " + spriteVelocityY);
         // System.out.println("(X, Y): (" + spriteX + ", " + spriteY + ")");
-        if (spriteY < 310 && !isJumping){
+        if (spriteY < groundY && !isJumping){
             System.out.println("Sprite Y: " + spriteY);
             playerSpriteVelocityY = gravity;
         }
@@ -147,6 +160,10 @@ public class Window extends JPanel implements ActionListener {
         }
         spriteY += playerSpriteVelocityY;
 
+        // Print out the background x position
+        System.out.println("Background X: " + backgroundX);
+
+        touchDoor = (backgroundX <= -1400) ? true : false;
 
         // Update background position
         backgroundX += backgroundSpriteVelocityX;
@@ -164,6 +181,10 @@ public class Window extends JPanel implements ActionListener {
 
         // Reset gravity after falling
         return 0;
+    }
+
+    public int getBackgroundX() {
+        return backgroundX;
     }
 
     private Image getScaledImage(Image srcImg, int w, int h){
