@@ -8,10 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -73,9 +71,9 @@ public class Window extends JPanel implements ActionListener {
                 } else if (keyCode == KeyEvent.VK_DOWN) {
                     playerSpriteVelocityY = 5; // Move sprite down
                 } else if (keyCode == KeyEvent.VK_LEFT) {
-                    backgroundSpriteVelocityX = 7; // Move background to the left
+                    backgroundSpriteVelocityX = 15; // Move background to the left
                 } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    backgroundSpriteVelocityX = -7; // Move background to the right
+                    backgroundSpriteVelocityX = -15; // Move background to the right
                 }
             }
 
@@ -165,11 +163,25 @@ public class Window extends JPanel implements ActionListener {
 
         touchDoor = (backgroundX <= -1400) ? true : false;
 
+        Congrats screen = new Congrats();
+
+        int randoahsdfhalsdjflasdf = 0;
+        if (touchDoor && randoahsdfhalsdjflasdf <= 0) {
+            randoahsdfhalsdjflasdf++;
+            System.out.println("CONGRATS YOU WON! You may now close the window. ");
+            // screen.showSplash(10000);
+            
+        }
+
         // Update background position
         backgroundX += backgroundSpriteVelocityX;
         
 
         repaint();
+    }
+
+    public boolean won() {
+        return touchDoor;
     }
     public int applyGravity() {
         // timer.start();

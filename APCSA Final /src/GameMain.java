@@ -1,13 +1,8 @@
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -16,10 +11,13 @@ public class GameMain extends JPanel implements KeyListener {
 
     private Sprite sprite;
     private Sprite backgroundSprite;
-     
 
-// hola
+    int z = 0;
+
+     
     public GameMain() {
+        z++;
+        
         // Load the background image
         // backgroundImage = new ImageIcon("BackGround Small.png").getImage();
 
@@ -112,18 +110,11 @@ public class GameMain extends JPanel implements KeyListener {
         game.setVelocityY(0);
         frame.add(game);
 
-        JPanel panel = new JPanel();
-        boolean touchDoor;
+
+
+
+
         
-        touchDoor = (game.getBackgroundX() <= -1400)? true : false;
-
-        if (touchDoor) {
-            JLabel congratsLabel = new JLabel("Congrats! Move to the next level.");
-            System.out.print("SONEMTHIGN");
-            panel.add(congratsLabel);
-        }
-
-
         // Show the window
         //frame.setVisible(true);
 
