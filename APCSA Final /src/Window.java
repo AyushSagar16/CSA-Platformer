@@ -222,7 +222,7 @@ public class Window extends JPanel implements ActionListener {
         backgroundX += backgroundSpriteVelocityX;
         
         // Add recursive method
-        score;
+        score();
 
         repaint();
     }
