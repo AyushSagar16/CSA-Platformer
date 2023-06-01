@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SplashScreen extends JWindow {
-    private static final int DISPLAY_TIME_MS = 3000;
+    private static final int SPLASH_WIDTH = 400;
+    private static final int SPLASH_HEIGHT = 300;
+    private static final int DISPLAY_TIME_MS = 5000;
 
     public SplashScreen() {
-        JLabel splashLabel = new JLabel(new ImageIcon("splash copy.png")); // Replace "splash.png" with the path to your splash image
-        JLabel splashLabel2 = new JLabel(new ImageIcon("splash copy.png"));
+        JLabel splashLabel = new JLabel(new ImageIcon("new-splash-resize.png")); // Replace "splash.png" with the path to your splash image
         getContentPane().add(splashLabel, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(null);
@@ -22,17 +23,4 @@ public class SplashScreen extends JWindow {
         dispose();
     }
 
-    // show splascreen for a longer time
-    public void showSplash(int time) {
-        setVisible(true);
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        dispose();
-    }
-
 }
-
-

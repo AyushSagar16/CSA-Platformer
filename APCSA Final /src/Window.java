@@ -102,6 +102,51 @@ public class Window extends JPanel implements ActionListener {
 
 
     }
+    // Arrays here
+    // Search Algo ;(
+    public int runBinarySearchIteratively(
+    int[] sortedArray, int key, int low, int high) {
+    int index = Integer.MAX_VALUE;
+    
+    while (low <= high) {
+        int mid = low  + ((high - low) / 2);
+        if (sortedArray[mid] < key) {
+            low = mid + 1;
+        } else if (sortedArray[mid] > key) {
+            high = mid - 1;
+        } else if (sortedArray[mid] == key) {
+            index = mid;
+            break;
+        }
+    }
+    return index;
+    }
+    
+    int[] randomArray = {1, 3, 4, 5, 6, 7, 8, 9};
+
+    int randomNum = runBinarySearchIteratively(randomArray, 8, 0, randomArray.length - 1);
+    // Arrays end here
+    // RECURSION HERE
+    ArrayList<Integer> scoreList = new ArrayList<Integer>();
+    scoreList.add(randomNum);
+
+
+    public int score = 0;
+    public int scoreMultiplier = randomNum;
+
+    public void score() {
+        if (score >= 100){
+            System.out.println("You win! GO TO THE DOOR!");
+            System.out.println("Your final score array is " + scoreList);
+        }
+        else {
+            score *= randomNum;
+            scoreList.add(score);
+            System.out.println("Your Score is" + score);
+            score();
+        }
+    }
+// Recursion ends here
 
     public void jump() {
         for (int i = 0; i < 1000; i++){
@@ -176,6 +221,8 @@ public class Window extends JPanel implements ActionListener {
         // Update background position
         backgroundX += backgroundSpriteVelocityX;
         
+        // Add recursive method
+        score;
 
         repaint();
     }
