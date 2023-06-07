@@ -1,6 +1,6 @@
 # CSA-Platformer
 Mate what have I created...
 
-TODO 
+TO DO 
 - Restructure files
 - Delete the game XD
